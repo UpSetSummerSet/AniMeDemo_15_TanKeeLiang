@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerController15 : MonoBehaviour
 {
     float speed = 5.00f;
     float jumpForce = 5.00f;
     int TrackSpace;
+    int TrackDeath = 10;
     bool IsDeath = false;
 
     public Animator playerAnim;
@@ -56,9 +58,14 @@ public class PlayerController15 : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                playerAnim.SetTrigger("trigDeath");
-                IsDeath = true;
+                TrackDeath--;
+                if(TrackDeath == 0)
+                {
+                    playerAnim.SetTrigger("trigDeath");
+                    IsDeath = true;
+                }
             }
+            Debug.Log(TrackDeath);
             JumpPlayer();
         }
     }
